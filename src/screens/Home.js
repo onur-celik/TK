@@ -7,12 +7,7 @@ const HomeScreen = ({navigation}) => {
   <SafeAreaView style={{flex : 1}}>
     <ScrollView>
       <Button 
-        title="Hamburger Menu"
-        onPress={()=>navigation.navigate("HamburgerMenu")}
-      >
-      </Button>
-      <Button 
-        title="Search">
+        title="Search Modal">
       </Button>
     </ScrollView>
   </SafeAreaView>
