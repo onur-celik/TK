@@ -5,16 +5,19 @@ import {
   StyleSheet, 
   SafeAreaView, 
   View, 
-  ScrollView 
+  ScrollView,
+  TextInput
 } from 'react-native'
-import { TextInput } from 'react-native-gesture-handler';
 import SearchInputIcon from './SearchInputIcon';
 import HandShaking from "./icons/hand-shaking.svg";
 import SearchModalTitle from './SearchModalTitle';
 import SearchResultPill from './SearchResultPill';
+import SearchResultListItem from './SearchResultListItem';
+import SearchLastViewed from './SearchLastViewed';
 
 const Search = () => {
   const [modalVisible, setModalVisible] = useState(true);
+  const [inputActive, setInputActive] = useState(false);
   return(
     <Modal
       animationType="slide"
@@ -34,6 +37,8 @@ const Search = () => {
             <TextInput
               placeholder="Nereye?"
               style={styles.SearchTextInput}
+              onFocus={()=>{ setInputActive(true) }}
+              onBlur={()=>{ setInputActive(false) }}
             />
           </View>
         </View>
@@ -49,7 +54,7 @@ const Search = () => {
           </View>
         </View>
 
-        <SearchModalTitle title="Popüler Bölgeler" />
+        <SearchModalTitle title="Popüler Bölgeler" icon="fire" />
         <View style={styles.SearchResultPillsWrapper}>
           <ScrollView
             horizontal
@@ -67,8 +72,13 @@ const Search = () => {
           </ScrollView>
         </View>
 
-        <SearchModalTitle title="Son Aramalar" />
-        <SearchModalTitle title="Son Inceledikleriniz" />
+        <SearchModalTitle title="Son Aramalar" icon="refresh" />
+        <SearchResultListItem text="Fethiye" />
+        <SearchResultListItem text="Kemer" />
+        
+        <SearchModalTitle title="Son Inceledikleriniz" icon="eye" />
+        <SearchLastViewed image="" text="Beydağlarının Yeşilinin Akdeni..." />
+        <SearchLastViewed image="" text="Fethiye’de Eşsiz bir Villa Dene..." />
         
       </SafeAreaView>
     </Modal>
@@ -114,10 +124,9 @@ const styles = StyleSheet.create({
     borderBottomWidth : 1,
     borderBottomColor : "#00000008",
     paddingBottom : 18,
-    marginBottom: 20
   },
   SearchHint : {
-    width:327,
+    width:300,
     flexDirection : "row"
   },
   SearchHintIcon : {
@@ -136,7 +145,6 @@ const styles = StyleSheet.create({
     height: 48,
     width : "100%",
     alignItems : "center",
-    marginBottom : 24
   },
   SearchResultPills : {
     paddingLeft : 80, 
