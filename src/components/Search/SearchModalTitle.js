@@ -3,8 +3,16 @@ import { Text, View, StyleSheet } from 'react-native'
 import TitleIconFire from "./icons/title-icon-fire.svg"
 import TitleIconRefresh from "./icons/title-icon-refresh.svg"
 import TitleIconEye from "./icons/title-icon-eye.svg"
+import Magnifier from "./icons/title-icon-magnifier.svg"
 const SearchModalTitle = (props) => {
-  const titleIcon = ( props.icon == "fire" ) ? <TitleIconFire width={20} height={20} /> : (props.icon == "refresh") ? <TitleIconRefresh width={20} height={20} /> : <TitleIconEye width={20} height={20} />;
+  const titleIcon = 
+    ( props.icon == "fire" ) ? 
+    <TitleIconFire width={20} height={20} /> : 
+      (props.icon == "refresh") ? 
+        <TitleIconRefresh width={20} height={20} /> : 
+          (props.icon == "magnifier") ?
+          <Magnifier width={20} height={20} /> : 
+          <TitleIconEye width={20} height={20} />
   return (
     <View style={styles.SearchModalTitlePositioner}>
       <View style={styles.SearchModalTitle}>

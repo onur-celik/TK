@@ -14,6 +14,7 @@ import SearchModalTitle from './SearchModalTitle';
 import SearchResultPill from './SearchResultPill';
 import SearchResultListItem from './SearchResultListItem';
 import SearchLastViewed from './SearchLastViewed';
+import LiveSearchResults from './LiveSearchResults';
 
 const Search = () => {
   const [modalVisible, setModalVisible] = useState(true);
@@ -28,58 +29,76 @@ const Search = () => {
       }}
     >
       <SafeAreaView style={styles.SearchModal}>
+        <ScrollView>
         
-        <View style={styles.SearchHeader}></View>
-        
-        <View style={styles.SearchInputPositioner}>
-          <View style={styles.SearchInputWrapper}>
-            <SearchInputIcon />
-            <TextInput
-              placeholder="Nereye?"
-              style={styles.SearchTextInput}
-              onFocus={()=>{ setInputActive(true) }}
-              onBlur={()=>{ setInputActive(false) }}
-            />
-          </View>
-        </View>
-
-        <View style={styles.SearchHintPositioner}>
-          <View style={styles.SearchHint}>
-            <View style={styles.SearchHintIcon}>
-              <HandShaking width={20} height={12} />
+          <View style={styles.SearchHeader}></View>
+          
+          <View style={styles.SearchInputPositioner}>
+            <View style={styles.SearchInputWrapper}>
+              <SearchInputIcon />
+              <TextInput
+                placeholder="Nereye?"
+                style={styles.SearchTextInput}
+                onChangeText={()=>{ setInputActive(true) }}
+                onBlur={()=>{ setInputActive(false) }}
+              />
             </View>
-            <Text style={styles.SearchHintText}>
-              Binlerce villadan dilediğini para iadesi güvencesiyle anında kirala!
-            </Text>
           </View>
-        </View>
 
-        <SearchModalTitle title="Popüler Bölgeler" icon="fire" />
-        <View style={styles.SearchResultPillsWrapper}>
-          <ScrollView
-            horizontal
-            contentContainerStyle={styles.SearchResultPills}
-          >
-            <SearchResultPill keyword="Fethiye" />
-            <SearchResultPill keyword="Bodrum" />
-            <SearchResultPill keyword="Kaş" />
-            <SearchResultPill keyword="Sapanca" />
-            <SearchResultPill keyword="Kuşadası" />
-            <SearchResultPill keyword="Didim" />
-            <SearchResultPill keyword="Alanya" />
-            <SearchResultPill keyword="Marmaris" />
-            <SearchResultPill keyword="Kemer" />
-          </ScrollView>
-        </View>
+          <View style={styles.SearchHintPositioner}>
+            <View style={styles.SearchHint}>
+              <View style={styles.SearchHintIcon}>
+                <HandShaking width={20} height={12} />
+              </View>
+              <Text style={styles.SearchHintText}>
+                Binlerce villadan dilediğini para iadesi güvencesiyle anında kirala!
+              </Text>
+            </View>
+          </View>
 
-        <SearchModalTitle title="Son Aramalar" icon="refresh" />
-        <SearchResultListItem text="Fethiye" />
-        <SearchResultListItem text="Kemer" />
-        
-        <SearchModalTitle title="Son Inceledikleriniz" icon="eye" />
-        <SearchLastViewed image="" text="Beydağlarının Yeşilinin Akdeni..." />
-        <SearchLastViewed image="" text="Fethiye’de Eşsiz bir Villa Dene..." />
-        
+          
+          
+          
+          { /* If search input is focused */ }
+          {
+            !inputActive ? 
+            <View>
+              <SearchModalTitle title="Popüler Bölgeler" icon="fire" />
+              <View style={styles.SearchResultPillsWrapper}>
+                <ScrollView
+                  horizontal
+                  contentContainerStyle={styles.SearchResultPills}
+                >
+                  <SearchResultPill keyword="Fethiye" />
+                  <SearchResultPill keyword="Bodrum" />
+                  <SearchResultPill keyword="Kaş" />
+                  <SearchResultPill keyword="Sapanca" />
+                  <SearchResultPill keyword="Kuşadası" />
+                  <SearchResultPill keyword="Didim" />
+                  <SearchResultPill keyword="Alanya" />
+                  <SearchResultPill keyword="Marmaris" />
+                  <SearchResultPill keyword="Kemer" />
+                </ScrollView>
+              </View>
+
+              <SearchModalTitle title="Son Aramalar" icon="refresh" />
+              <SearchResultListItem text="Fethiye" />
+              <SearchResultListItem text="Kemer" />
+              
+              <SearchModalTitle title="Son Inceledikleriniz" icon="eye" />
+              <SearchLastViewed image="" text="Beydağlarının Yeşilinin Akdeni..." />
+              <SearchLastViewed image="" text="Fethiye’de Eşsiz bir Villa Dene..." /> 
+            </View>
+            : null
+          }
+          
+          { /* If search input is focused */ }
+          {
+            inputActive ? 
+            <LiveSearchResults /> : null
+          }
+          
+        </ScrollView>
       </SafeAreaView>
     </Modal>
   )
