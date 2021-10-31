@@ -15,10 +15,17 @@ import SearchResultPill from './SearchResultPill';
 import SearchResultListItem from './SearchResultListItem';
 import SearchLastViewed from './SearchLastViewed';
 import LiveSearchResults from './LiveSearchResults';
+import TimeRangeSelector from './TimeRangeSelector';
 
 const Search = () => {
   const [modalVisible, setModalVisible] = useState(true);
   const [inputActive, setInputActive] = useState(false);
+  const [resultClicked, setResultClicked] = useState(true);
+
+  function setterFunc() {
+    setResultClicked(!resultClicked)
+  }
+
   return(
     <Modal
       animationType="slide"
@@ -95,7 +102,13 @@ const Search = () => {
           { /* If search input is focused */ }
           {
             inputActive ? 
-            <LiveSearchResults /> : null
+            <LiveSearchResults rc={resultClicked} setter={setterFunc} /> : null
+          }
+
+          { /* If any result clicked */ }
+          {
+            resultClicked ? 
+            <TimeRangeSelector  /> : null
           }
           
         </ScrollView>

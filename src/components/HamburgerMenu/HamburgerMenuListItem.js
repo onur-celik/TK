@@ -39,7 +39,7 @@ const HamburgerMenuListItem = (props) => {
 
         {populerBolgeler[i].ilceler.map((ilce)=>{
           return (
-            <TouchableOpacity style={styles.subListSubItem}>
+            <TouchableOpacity key={()=>ilceler.findIndex(ilce)} style={styles.subListSubItem}>
               <Text style={{color : "#6D6D6D"}}>
                 {ilce} Kiralık Villa
               </Text>
