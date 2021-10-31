@@ -1,18 +1,23 @@
 import React from 'react'
-import { Text, View, StyleSheet } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 import SearchResultIcon from "./icons/search-result-pin.svg"
 import ArrowBlackRight from "./icons/arrow-black-right.svg"
 const SearchResultListItem = (props) => {
   return (
-    <View style={styles.SearchResultListItem}>
+    <TouchableOpacity 
+      style={styles.SearchResultListItem}
+      onPress={()=>{
+        
+      }}
+    >
       <View style={styles.SearchResultFirstCol}>
         <View style={styles.SearchResultFirstColIconWrapper}>
           <SearchResultIcon width={20} height={20} />
         </View>
-        <Text>{props.text}</Text>
+        <Text style={styles.SearchResultText}>{props.text}</Text>
       </View>
       <ArrowBlackRight style={{marginRight : 30, opacity: 0.6}} width={7} height={12} />
-    </View>
+    </TouchableOpacity>
   )
 }
 const styles = StyleSheet.create({
@@ -32,6 +37,9 @@ const styles = StyleSheet.create({
     borderRadius : 8,
     marginRight : 10,
     alignItems : "center"
+  },
+  SearchResultText : {
+    color: "#6D6D6D"
   }
 });
 
