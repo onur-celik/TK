@@ -16,6 +16,23 @@ const TimeRangeSelector = (props) => {
   return (
     <View>
       <Text style={styles.widgetHeader}>Giriş Tarihi Seçin</Text>
+      
+      <View style={styles.widgetStatesContainer}>
+        <View style={[styles.widgetStatesGroup, styles.firstGroup]}>
+          <View style={[styles.widgetStatesButton, styles.widgetStatesButtonActive]}>
+            <Text style={[styles.widgetStatesButtonText, styles.widgetStatesButtonActiveText]}>Giriş</Text>
+          </View>
+          <View style={styles.widgetStatesButton}>
+            <Text style={styles.widgetStatesButtonText}>Çıkış</Text>
+          </View>
+        </View>
+        <View style={[styles.widgetStatesGroup, styles.secondGroup]}>
+          <View style={styles.widgetStatesButton}>
+            <Text style={styles.widgetStatesButtonText}>Kişi Sayısı</Text>
+          </View>
+        </View>
+      </View>
+
       <View style={styles.calendarWrapper}>
         <Calendar
           // usage : https://github.com/wix/react-native-calendars
@@ -65,6 +82,42 @@ const styles = StyleSheet.create({
     textAlign : "center",
     marginTop: 16,
     fontWeight : "600"
+  },
+  widgetStatesContainer : {
+    flexDirection : "row",
+    justifyContent : "center",
+    marginTop : 24
+  },
+  widgetStatesGroup : {
+    flexDirection : "row",
+    height : 40,
+    backgroundColor : "#18223320",
+    borderRadius: 32,
+    alignItems : "center",
+    padding : 4
+  },
+  firstGroup : {
+    width: 168,
+    marginRight : 8
+  },
+  secondGroup : {
+    width : 127
+  },
+  widgetStatesButton : {
+    flex: 1,
+    textAlign : "center"
+  },
+  widgetStatesButtonText : {
+    textAlign : "center"
+  },
+  widgetStatesButtonActive : {
+    backgroundColor : "white",
+    height: 32,
+    borderRadius : 32,
+    justifyContent : "center"
+  },
+  widgetStatesButtonActiveText : {
+    color : "#3B7FFF"
   }
 });
 
