@@ -13,12 +13,11 @@ const LiveSearchResults = (props) => {
         text="Muğla, Fethiye"
         setter={testFunc}
       />
-      <SearchResultListItem setter={props.setter.bind(this)} text="Muğla, Fethiye, Akarca" />
-      <SearchResultListItem setter={props.setter} text="Muğla, Fethiye, Babataşı" />
-      <SearchResultListItem setter={props.setter} text="Muğla, Fethiye, Cumhuriyet" />
-      <SearchResultListItem setter={props.setter} text="Muğla, Fethiye, Çamköy" />
-      <SearchResultListItem setter={props.setter} text="Muğla, Fethiye, Çatalarık" />
-      <Text>RC? {props.rc}</Text>
+      <SearchResultListItem setter={testFunc} text="Muğla, Fethiye, Akarca" />
+      <SearchResultListItem setter={testFunc} text="Muğla, Fethiye, Babataşı" />
+      <SearchResultListItem setter={testFunc} text="Muğla, Fethiye, Cumhuriyet" />
+      <SearchResultListItem setter={testFunc} text="Muğla, Fethiye, Çamköy" />
+      <SearchResultListItem setter={testFunc} text="Muğla, Fethiye, Çatalarık" />
     </View>
   )
 }

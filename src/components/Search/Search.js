@@ -19,7 +19,7 @@ import TimeRangeSelector from './TimeRangeSelector';
 
 const Search = () => {
   const [modalVisible, setModalVisible] = useState(true);
-  const [inputActive, setInputActive] = useState(true);
+  const [inputActive, setInputActive] = useState(false);
   const [resultClicked, setResultClicked] = useState(false);
 
   function setterFunc() {
