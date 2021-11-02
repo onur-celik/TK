@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
-import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
-import {LocaleConfig} from 'react-native-calendars';
+import {Calendar, CalendarList, Agenda, LocaleConfig} from 'react-native-calendars';
+import CalendarIcon from "./icons/calendar-icon.svg";
+import UserIcon from "./icons/user-icon.svg";
 LocaleConfig.locales['tr'] = {
   monthNames: ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'],
   monthNamesShort: ['Ock.','Şbt.','Mrt.','Nsn.','May.','Haz.','Tem.','Ağu.','Eyl.','Ekm','Ksm.','Ara.'],
@@ -20,7 +21,10 @@ const TimeRangeSelector = (props) => {
       <View style={styles.widgetStatesContainer}>
         <View style={[styles.widgetStatesGroup, styles.firstGroup]}>
           <View style={[styles.widgetStatesButton, styles.widgetStatesButtonActive]}>
-            <Text style={[styles.widgetStatesButtonText, styles.widgetStatesButtonActiveText]}>Giriş</Text>
+            <CalendarIcon width={16} height={18} style={{marginRight : 6.7}}/>
+            <Text style={[styles.widgetStatesButtonText, styles.widgetStatesButtonActiveText]}>
+              Giriş
+            </Text>
           </View>
           <View style={styles.widgetStatesButton}>
             <Text style={styles.widgetStatesButtonText}>Çıkış</Text>
@@ -28,6 +32,7 @@ const TimeRangeSelector = (props) => {
         </View>
         <View style={[styles.widgetStatesGroup, styles.secondGroup]}>
           <View style={styles.widgetStatesButton}>
+            <UserIcon width={16} height={18} style={{marginRight : 6.7}}/>
             <Text style={styles.widgetStatesButtonText}>Kişi Sayısı</Text>
           </View>
         </View>
@@ -38,11 +43,7 @@ const TimeRangeSelector = (props) => {
           // usage : https://github.com/wix/react-native-calendars
           onDayPress={(day) => {console.log('selected day', day)}}
           onDayLongPress={(day) => {console.log('selected day', day)}}
-          // Month format in calendar title. Formatting values: http://arshaw.com/xdate/#Formatting
-          monthFormat={'DD MM yyyy'}
           onMonthChange={(month) => {console.log('month changed', month)}}
-          hideArrows={true}
-          renderArrow={(direction) => (<Arrow/>)}
           hideExtraDays={false}
           disableMonthChange={false}
           firstDay={1}
@@ -53,8 +54,13 @@ const TimeRangeSelector = (props) => {
           disableArrowLeft={false}
           disableArrowRight={false}
           disableAllTouchEventsForDisabledDays={false}
-          renderHeader={(date) => {console.log("date is : ", date)}}
-          enableSwipeMonths={true}
+          markingType={'period'}
+          markedDates={{
+            '2021-11-10': {color: '#FFADB2', textColor : "#701E24", startingDay: true},
+            '2021-11-11': {color: '#FFADB214', textColor : "#701E24"},
+            '2021-11-12': {color: '#FFADB214', textColor : "#701E24"},
+            '2021-11-13': {color: '#FF4451', textColor : "#FFFFFF", endingDay: true},
+          }}
         />
       </View>
       <TouchableOpacity>
@@ -105,10 +111,14 @@ const styles = StyleSheet.create({
   },
   widgetStatesButton : {
     flex: 1,
-    textAlign : "center"
+    textAlign : "center",
+    alignItems : "center",
+    justifyContent : "center",
+    flexDirection : "row"
   },
   widgetStatesButtonText : {
-    textAlign : "center"
+    textAlign : "center",
+  
   },
   widgetStatesButtonActive : {
     backgroundColor : "white",
