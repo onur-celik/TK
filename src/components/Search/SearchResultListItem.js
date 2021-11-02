@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity, SegmentedControlIOS } from 'react-native'
 import SearchResultIcon from "./icons/search-result-pin.svg"
 import ArrowBlackRight from "./icons/arrow-black-right.svg"
 const SearchResultListItem = (props) => {
@@ -7,7 +7,7 @@ const SearchResultListItem = (props) => {
     <TouchableOpacity 
       style={styles.SearchResultListItem}
       onPress={()=>{
-        
+        props.setter()
       }}
     >
       <View style={styles.SearchResultFirstCol}>

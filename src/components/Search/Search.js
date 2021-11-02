@@ -19,8 +19,8 @@ import TimeRangeSelector from './TimeRangeSelector';
 
 const Search = () => {
   const [modalVisible, setModalVisible] = useState(true);
-  const [inputActive, setInputActive] = useState(false);
-  const [resultClicked, setResultClicked] = useState(true);
+  const [inputActive, setInputActive] = useState(true);
+  const [resultClicked, setResultClicked] = useState(false);
 
   function setterFunc() {
     setResultClicked(!resultClicked)
@@ -51,17 +51,20 @@ const Search = () => {
               />
             </View>
           </View>
-
-          <View style={styles.SearchHintPositioner}>
-            <View style={styles.SearchHint}>
-              <View style={styles.SearchHintIcon}>
-                <HandShaking width={20} height={12} />
+          {
+          (!resultClicked) ?
+            <View style={styles.SearchHintPositioner}>
+              <View style={styles.SearchHint}>
+                <View style={styles.SearchHintIcon}>
+                  <HandShaking width={20} height={12} />
+                </View>
+                <Text style={styles.SearchHintText}>
+                  Binlerce villadan dilediğini para iadesi güvencesiyle anında kirala!
+                </Text>
               </View>
-              <Text style={styles.SearchHintText}>
-                Binlerce villadan dilediğini para iadesi güvencesiyle anında kirala!
-              </Text>
             </View>
-          </View>
+            : null
+          }
 
           
           
@@ -101,7 +104,7 @@ const Search = () => {
           
           { /* If search input is focused */ }
           {
-            inputActive ? 
+            (inputActive && !resultClicked) ? 
             <LiveSearchResults rc={resultClicked} setter={setterFunc} /> : null
           }
 
