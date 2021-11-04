@@ -3,6 +3,7 @@ import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 import {Calendar, CalendarList, Agenda, LocaleConfig} from 'react-native-calendars';
 import CalendarIcon from "./icons/calendar-icon.svg";
 import UserIcon from "./icons/user-icon.svg";
+import PeopleSelector from './PeopleSelector';
 LocaleConfig.locales['tr'] = {
   monthNames: ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'],
   monthNamesShort: ['Ock.','Şbt.','Mrt.','Nsn.','May.','Haz.','Tem.','Ağu.','Eyl.','Ekm','Ksm.','Ara.'],
@@ -14,9 +15,23 @@ LocaleConfig.defaultLocale = 'tr';
 
 const TimeRangeSelector = (props) => {
   const [tarihWidgetState, tarihWidgetStateSetter] = useState(1);
+  const [tarihAraligi, tarihAraligiSetter] = useState({
+    '2021-11-10': {color: '#FFADB2', textColor : "#701E24", startingDay: true},
+    '2021-11-11': {color: '#FFADB214', textColor : "#701E24"},
+    '2021-11-12': {color: '#FFADB214', textColor : "#701E24"},
+    '2021-11-13': {color: '#FF4451', textColor : "#FFFFFF", endingDay: true},
+  });
   return (
     <View>
-      <Text style={styles.widgetHeader}>Giriş Tarihi Seçin</Text>
+      <Text style={styles.widgetHeader}>
+        {
+          (tarihWidgetState == 1 || tarihWidgetState == 2) 
+            ? "Giriş tarihi seçin" 
+            : (tarihWidgetState == 3)
+              ? "Kişi sayısı seçin"
+              : "Fiyat aralığınız var mı?" 
+        }
+      </Text>
       
       <View style={styles.widgetStatesContainer}>
         <View style={[styles.widgetStatesGroup, styles.firstGroup]}>
@@ -38,31 +53,36 @@ const TimeRangeSelector = (props) => {
         </View>
       </View>
 
-      <View style={styles.calendarWrapper}>
-        <Calendar
-          // usage : https://github.com/wix/react-native-calendars
-          onDayPress={(day) => {console.log('selected day', day)}}
-          onDayLongPress={(day) => {console.log('selected day', day)}}
-          onMonthChange={(month) => {console.log('month changed', month)}}
-          hideExtraDays={false}
-          disableMonthChange={false}
-          firstDay={1}
-          hideDayNames={false}
-          showWeekNumbers={false}
-          onPressArrowLeft={subtractMonth => subtractMonth()}
-          onPressArrowRight={addMonth => addMonth()}
-          disableArrowLeft={false}
-          disableArrowRight={false}
-          disableAllTouchEventsForDisabledDays={false}
-          markingType={'period'}
-          markedDates={{
-            '2021-11-10': {color: '#FFADB2', textColor : "#701E24", startingDay: true},
-            '2021-11-11': {color: '#FFADB214', textColor : "#701E24"},
-            '2021-11-12': {color: '#FFADB214', textColor : "#701E24"},
-            '2021-11-13': {color: '#FF4451', textColor : "#FFFFFF", endingDay: true},
-          }}
-        />
-      </View>
+      {
+        (tarihWidgetState == 1) ?
+        <View style={styles.calendarWrapper}>
+          <Calendar
+            // usage : https://github.com/wix/react-native-calendars
+            onDayPress={(day) => { tarihWidgetStateSetter(3) }}
+            onDayLongPress={(day) => {console.log('selected day', day)}}
+            onMonthChange={(month) => {console.log('month changed', month)}}
+            hideExtraDays={false}
+            disableMonthChange={false}
+            firstDay={1}
+            hideDayNames={false}
+            showWeekNumbers={false}
+            onPressArrowLeft={subtractMonth => subtractMonth()}
+            onPressArrowRight={addMonth => addMonth()}
+            disableArrowLeft={false}
+            disableArrowRight={false}
+            disableAllTouchEventsForDisabledDays={false}
+            markingType={'period'}
+            markedDates={tarihAraligi}
+          />
+        </View>
+        : (tarihWidgetState == 3) ?
+          <View style={styles.calendarWrapper}>
+            <PeopleSelector/>
+          </View>
+          : null
+      }
+
+      
       <TouchableOpacity>
         <Text style={styles.skipLink}>DAHA SONRA SEÇ</Text>
       </TouchableOpacity>
