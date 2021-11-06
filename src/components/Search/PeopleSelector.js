@@ -6,7 +6,7 @@ import Babies from "./icons/babies.svg";
 import Plus from "./icons/plus.svg";
 import Minus from "./icons/minus.svg";
 
-const PeopleSelector = () => {
+const PeopleSelector = (props) => {
   const [adults, adultsSetter] = useState(0);
   const [kids, kidsSetter] = useState(0);
   const [babies, babiesSetter] = useState(0);
@@ -62,16 +62,7 @@ const PeopleSelector = () => {
   }
 
   function goToPriceRangeSelection(){
-    var params = {adults, kids, babies};
-    if(
-      params.adults > 0 &&
-      params.kids > 0 &&
-      params.babies > 0
-    ){
-      console.log("fiyat secimine gidilebilir")
-    }else{
-      console.log("fiyat secimine gidilemez", params)
-    }
+    console.log(props.setter(4))
   }
   return (
     <View style={{ padding : 14 }}>

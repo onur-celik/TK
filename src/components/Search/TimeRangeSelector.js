@@ -6,6 +6,8 @@ import CalendarIconActive from "./icons/calendar-icon-active.svg";
 import UserIcon from "./icons/user-icon.svg";
 import UserIconActive from "./icons/user-icon-active.svg";
 import PeopleSelector from './PeopleSelector';
+import PriceRangeSelector from './PriceRangeSelector';
+
 LocaleConfig.locales['tr'] = {
   monthNames: ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'],
   monthNamesShort: ['Ock.','Şbt.','Mrt.','Nsn.','May.','Haz.','Tem.','Ağu.','Eyl.','Ekm','Ksm.','Ara.'],
@@ -34,52 +36,55 @@ const TimeRangeSelector = (props) => {
               : "Fiyat aralığınız var mı?" 
         }
       </Text>
-      
-      <View style={styles.widgetStatesContainer}>
-        <View style={[styles.widgetStatesGroup, styles.firstGroup]}>
-          <View style={
-            (tarihWidgetState == 1) 
-              ? [styles.widgetStatesButton, styles.widgetStatesButtonActive]
-              : styles.widgetStatesButton
-          }>
-            {
-              (tarihWidgetState == 1) 
-              ? <CalendarIconActive backgroundColor={"red"} width={16} height={18} style={{marginRight : 6.7}}/>
-              : <CalendarIcon backgroundColor={"red"} width={16} height={18} style={{marginRight : 6.7}}/>
-            }
-            <Text style={
-              (tarihWidgetState == 1)
-                ? [styles.widgetStatesButtonText, styles.widgetStatesButtonActiveText]
-                : styles.widgetStatesButtonText
-            }>
-              Giriş
-            </Text>
+      {
+        (tarihWidgetState != 4) ?
+          <View style={styles.widgetStatesContainer}>
+            <View style={[styles.widgetStatesGroup, styles.firstGroup]}>
+              <View style={
+                (tarihWidgetState == 1) 
+                  ? [styles.widgetStatesButton, styles.widgetStatesButtonActive]
+                  : styles.widgetStatesButton
+              }>
+                {
+                  (tarihWidgetState == 1) 
+                  ? <CalendarIconActive backgroundColor={"red"} width={16} height={18} style={{marginRight : 6.7}}/>
+                  : <CalendarIcon backgroundColor={"red"} width={16} height={18} style={{marginRight : 6.7}}/>
+                }
+                <Text style={
+                  (tarihWidgetState == 1)
+                    ? [styles.widgetStatesButtonText, styles.widgetStatesButtonActiveText]
+                    : styles.widgetStatesButtonText
+                }>
+                  Giriş
+                </Text>
+              </View>
+              <View style={styles.widgetStatesButton}>
+                <Text style={styles.widgetStatesButtonText}>Çıkış</Text>
+              </View>
+            </View>
+            <View style={[styles.widgetStatesGroup, styles.secondGroup]}>
+              <View style={
+                (tarihWidgetState == 3) 
+                  ? [styles.widgetStatesButton, styles.widgetStatesButtonActive]
+                  : styles.widgetStatesButton
+              }>
+                {
+                  (tarihWidgetState == 3) 
+                  ? <UserIconActive width={16} height={18} style={{marginRight : 6.7}}/>
+                  : <UserIcon width={16} height={18} style={{marginRight : 6.7}}/>
+                }
+                <Text style={
+                  (tarihWidgetState == 3)
+                    ? [styles.widgetStatesButtonText, styles.widgetStatesButtonActiveText]
+                    : styles.widgetStatesButtonText
+                }>
+                  Kişi Sayısı
+                </Text>
+              </View>
+            </View>
           </View>
-          <View style={styles.widgetStatesButton}>
-            <Text style={styles.widgetStatesButtonText}>Çıkış</Text>
-          </View>
-        </View>
-        <View style={[styles.widgetStatesGroup, styles.secondGroup]}>
-          <View style={
-            (tarihWidgetState == 3) 
-              ? [styles.widgetStatesButton, styles.widgetStatesButtonActive]
-              : styles.widgetStatesButton
-          }>
-            {
-              (tarihWidgetState == 3) 
-              ? <UserIconActive width={16} height={18} style={{marginRight : 6.7}}/>
-              : <UserIcon width={16} height={18} style={{marginRight : 6.7}}/>
-            }
-            <Text style={
-              (tarihWidgetState == 3)
-                ? [styles.widgetStatesButtonText, styles.widgetStatesButtonActiveText]
-                : styles.widgetStatesButtonText
-            }>
-              Kişi Sayısı
-            </Text>
-          </View>
-        </View>
-      </View>
+        : null
+      }
 
       {
         (tarihWidgetState == 1) ?
@@ -105,8 +110,10 @@ const TimeRangeSelector = (props) => {
         </View>
         : (tarihWidgetState == 3) ?
           <View style={styles.calendarWrapper}>
-            <PeopleSelector/>
+            <PeopleSelector setter={tarihWidgetStateSetter}/>
           </View>
+          : (tarihWidgetState == 4) ?
+            <PriceRangeSelector />
           : null
       }
 
