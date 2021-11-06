@@ -7,6 +7,9 @@ import Plus from "./icons/plus.svg";
 import Minus from "./icons/minus.svg";
 
 const PeopleSelector = () => {
+  const [adults, adultsSetter] = useState(0);
+  const [kids, kidsSetter] = useState(0);
+  const [babies, babiesSetter] = useState(0);
   return (
     <View style={{ padding : 14 }}>
       
@@ -20,11 +23,21 @@ const PeopleSelector = () => {
         </View>
         <View style={styles.col2}>
           <View style={styles.peopleSelectorButtons}>
-            <TouchableOpacity style={styles.minus}>
+            <TouchableOpacity 
+              style={styles.minus}
+              onPress={()=>{
+                adultsSetter(adults-1)
+              }}
+              >
               <Minus width={12} />
             </TouchableOpacity>
-            <Text style={styles.peopleAmount}>{0}</Text>
-            <TouchableOpacity style={styles.plus}>
+            <Text style={styles.peopleAmount}>{adults}</Text>
+            <TouchableOpacity 
+              style={styles.plus}
+              onPress={()=>{
+                adultsSetter(adults+1)
+              }}
+            >
               <Plus width={12} height={12} />
             </TouchableOpacity>
           </View>
@@ -41,11 +54,21 @@ const PeopleSelector = () => {
         </View>
         <View style={styles.col2}>
           <View style={styles.peopleSelectorButtons}>
-            <TouchableOpacity style={styles.minus}>
+            <TouchableOpacity 
+              style={styles.minus}
+              onPress={()=>{
+                kidsSetter(kids-1)
+              }}
+            >
               <Minus width={12} />
             </TouchableOpacity>
-            <Text style={styles.peopleAmount}>{0}</Text>
-            <TouchableOpacity style={styles.plus}>
+            <Text style={styles.peopleAmount}>{kids}</Text>
+            <TouchableOpacity 
+              style={styles.plus}
+              onPress={()=>{
+                kidsSetter(kids+1)
+              }}
+            >
               <Plus width={12} height={12} />
             </TouchableOpacity>
           </View>
@@ -62,11 +85,21 @@ const PeopleSelector = () => {
         </View>
         <View style={styles.col2}>
           <View style={styles.peopleSelectorButtons}>
-            <TouchableOpacity style={styles.minus}>
+            <TouchableOpacity 
+              style={styles.minus}
+              onPress={()=>{
+                babiesSetter(babies-1)
+              }}
+            >
               <Minus width={12} />
             </TouchableOpacity>
-            <Text style={styles.peopleAmount}>{0}</Text>
-            <TouchableOpacity style={styles.plus}>
+            <Text style={styles.peopleAmount}>{babies}</Text>
+            <TouchableOpacity 
+              style={styles.plus}
+              onPress={()=>{
+                babiesSetter(babies+1)
+              }}
+            >
               <Plus width={12} height={12} />
             </TouchableOpacity>
           </View>
