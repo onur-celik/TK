@@ -10,6 +10,69 @@ const PeopleSelector = () => {
   const [adults, adultsSetter] = useState(0);
   const [kids, kidsSetter] = useState(0);
   const [babies, babiesSetter] = useState(0);
+  const [nextStepAvailable, nextStepAvailableSetter] = useState(false)
+
+  function peopleCounter(type, action){
+    switch(type){
+      case "adults":
+        if(action == "increase"){
+          adultsSetter(adults+1)
+        }else{
+          if(adults > 0){
+            adultsSetter(adults-1)
+          }
+        }
+      break;
+
+      case "kids":
+        if(action == "increase"){
+          kidsSetter(kids+1)
+        }else{
+          if(kids > 0){
+            kidsSetter(kids-1)
+          }
+        }
+      break;
+
+      case "babies":
+        if(action == "increase"){
+          babiesSetter(babies+1)
+        }else{
+          if(babies > 0){
+            babiesSetter(babies-1)
+          }
+        }
+      break;
+    }
+    handleNextStepButton()
+  }
+
+  function handleNextStepButton(){
+    var params = {adults, kids, babies};
+    console.log(params)
+    if(
+      params.adults > 0 ||
+      params.kids   > 0 ||
+      params.babies > 0
+    ){
+      nextStepAvailableSetter(true)
+    }else{
+      nextStepAvailableSetter(false)
+    }
+  }
+
+  function goToPriceRangeSelection(){
+    var params = {adults, kids, babies};
+    if(
+      params.adults > 0 &&
+      params.kids > 0 &&
+      params.babies > 0
+    ){
+      console.log("fiyat secimine gidilebilir")
+    }else{
+      console.log("fiyat secimine gidilemez", params)
+    }
+  }
   return (
     <View style={{ padding : 14 }}>
       
@@ -26,7 +89,7 @@ const PeopleSelector = () => {
             <TouchableOpacity 
               style={styles.minus}
               onPress={()=>{
-                adultsSetter(adults-1)
+                peopleCounter("adults", "decrease");
               }}
               >
               <Minus width={12} />
@@ -35,7 +98,7 @@ const PeopleSelector = () => {
             <TouchableOpacity 
               style={styles.plus}
               onPress={()=>{
-                adultsSetter(adults+1)
+                peopleCounter("adults", "increase");
               }}
             >
               <Plus width={12} height={12} />
@@ -57,7 +120,7 @@ const PeopleSelector = () => {
             <TouchableOpacity 
               style={styles.minus}
               onPress={()=>{
-                kidsSetter(kids-1)
+                peopleCounter("kids", "decrease");
               }}
             >
               <Minus width={12} />
@@ -66,7 +129,7 @@ const PeopleSelector = () => {
             <TouchableOpacity 
               style={styles.plus}
               onPress={()=>{
-                kidsSetter(kids+1)
+                peopleCounter("kids", "increase");
               }}
             >
               <Plus width={12} height={12} />
@@ -88,7 +151,7 @@ const PeopleSelector = () => {
             <TouchableOpacity 
               style={styles.minus}
               onPress={()=>{
-                babiesSetter(babies-1)
+                peopleCounter("babies", "decrease");
               }}
             >
               <Minus width={12} />
@@ -97,13 +160,28 @@ const PeopleSelector = () => {
             <TouchableOpacity 
               style={styles.plus}
               onPress={()=>{
-                babiesSetter(babies+1)
+                peopleCounter("babies", "increase");
               }}
             >
               <Plus width={12} height={12} />
             </TouchableOpacity>
           </View>
         </View>
+      </View>
+
+      <View style={styles.devamEtButtonWrapper}>
+        <TouchableOpacity 
+          style={
+            (nextStepAvailable) 
+            ? [styles.devamEtButton, styles.devamEtButtonActive]
+            : styles.devamEtButton
+          }
+          onPress={()=>{
+            goToPriceRangeSelection()
+          }}
+        >
+          <Text style={styles.devamEtButtonText}>DEVAM ET{nextStepAvailable}</Text>
+        </TouchableOpacity>
       </View>
       
 
@@ -168,6 +246,23 @@ const styles = StyleSheet.create({
     fontSize : 24,
     fontWeight : "bold"
   },
+  devamEtButtonWrapper : {
+    borderTopWidth : 1,
+    borderTopColor : "#18323320",
+    marginTop : 24,
+    paddingTop:24
+  },
+  devamEtButton : {
+    width: "100%",
+    borderRadius : 32,
+    backgroundColor : "#18223340",
+    alignItems : "center",
+    paddingVertical : 11
+  },
+  devamEtButtonActive : {
+    backgroundColor : "#3B7FFF"
+  },
+  devamEtButtonText : {},
 });
 
 export default PeopleSelector

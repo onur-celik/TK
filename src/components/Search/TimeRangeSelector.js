@@ -2,7 +2,9 @@ import React, {useState} from 'react'
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 import {Calendar, CalendarList, Agenda, LocaleConfig} from 'react-native-calendars';
 import CalendarIcon from "./icons/calendar-icon.svg";
+import CalendarIconActive from "./icons/calendar-icon-active.svg";
 import UserIcon from "./icons/user-icon.svg";
+import UserIconActive from "./icons/user-icon-active.svg";
 import PeopleSelector from './PeopleSelector';
 LocaleConfig.locales['tr'] = {
   monthNames: ['Ocak','Şubat','Mart','Nisan','Mayıs','Haziran','Temmuz','Ağustos','Eylül','Ekim','Kasım','Aralık'],
@@ -35,9 +37,21 @@ const TimeRangeSelector = (props) => {
       
       <View style={styles.widgetStatesContainer}>
         <View style={[styles.widgetStatesGroup, styles.firstGroup]}>
-          <View style={[styles.widgetStatesButton, styles.widgetStatesButtonActive]}>
-            <CalendarIcon width={16} height={18} style={{marginRight : 6.7}}/>
-            <Text style={[styles.widgetStatesButtonText, styles.widgetStatesButtonActiveText]}>
+          <View style={
+            (tarihWidgetState == 1) 
+              ? [styles.widgetStatesButton, styles.widgetStatesButtonActive]
+              : styles.widgetStatesButton
+          }>
+            {
+              (tarihWidgetState == 1) 
+              ? <CalendarIconActive backgroundColor={"red"} width={16} height={18} style={{marginRight : 6.7}}/>
+              : <CalendarIcon backgroundColor={"red"} width={16} height={18} style={{marginRight : 6.7}}/>
+            }
+            <Text style={
+              (tarihWidgetState == 1)
+                ? [styles.widgetStatesButtonText, styles.widgetStatesButtonActiveText]
+                : styles.widgetStatesButtonText
+            }>
               Giriş
             </Text>
           </View>
@@ -46,9 +60,23 @@ const TimeRangeSelector = (props) => {
           </View>
         </View>
         <View style={[styles.widgetStatesGroup, styles.secondGroup]}>
-          <View style={styles.widgetStatesButton}>
-            <UserIcon width={16} height={18} style={{marginRight : 6.7}}/>
-            <Text style={styles.widgetStatesButtonText}>Kişi Sayısı</Text>
+          <View style={
+            (tarihWidgetState == 3) 
+              ? [styles.widgetStatesButton, styles.widgetStatesButtonActive]
+              : styles.widgetStatesButton
+          }>
+            {
+              (tarihWidgetState == 3) 
+              ? <UserIconActive width={16} height={18} style={{marginRight : 6.7}}/>
+              : <UserIcon width={16} height={18} style={{marginRight : 6.7}}/>
+            }
+            <Text style={
+              (tarihWidgetState == 3)
+                ? [styles.widgetStatesButtonText, styles.widgetStatesButtonActiveText]
+                : styles.widgetStatesButtonText
+            }>
+              Kişi Sayısı
+            </Text>
           </View>
         </View>
       </View>
