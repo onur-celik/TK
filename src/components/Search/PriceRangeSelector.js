@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import RangeSlider from '@jesster2k10/react-native-range-slider';
 
 const PriceRangeSelector = () => {
   return (
@@ -10,8 +11,21 @@ const PriceRangeSelector = () => {
           Gecelik ortalama fiyat : <Text style={styles.bold}>900₺</Text> 
         </Text>
         <View style={styles.priceRangeGraph}>
-
         </View>
+
+        <RangeSlider
+          type="range" // ios only
+          min={0}
+          max={100}
+          selectedMinimum={20} // ios only
+          selectedMaximum={60} // ios only
+          tintColor="#A9C7FF"
+          handleColor="#3B7FFF"
+          handlePressedColor="#000000"
+          tintColorBetweenHandles="#A9C7FF"
+          onChange={()=>{}}
+          style={{marginBottom: 15}}
+        />
 
         <View style={styles.priceBoxes}>
           <View style={styles.priceBoxesLeft}>
@@ -66,7 +80,7 @@ const styles = StyleSheet.create({
   },
   priceRangeGraph : {
     backgroundColor : "#18323305",
-    height: 120,
+    height: 100,
     marginTop : 12
   },
   priceBoxes : {
@@ -108,5 +122,8 @@ const styles = StyleSheet.create({
     fontWeight : "600"
   }
 });
+
+// range bar color : #A9C7FF
+// range slider handle color : #3B7FFF
 
 export default PriceRangeSelector;
